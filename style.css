@@ -13,7 +13,8 @@
 }
 
 body {
-    background-color: var(--bg-color);
+    background-color: #5b7be9;
+    /* Royal blue from reference */
     font-family: 'Poppins', sans-serif;
     margin: 0;
     padding: 15px;
@@ -42,7 +43,7 @@ body {
 }
 
 .app-logo {
-    height: 110px;
+    height: 150px;
     width: auto;
     filter: drop-shadow(2px 4px 0px rgba(0, 0, 0, 0.15));
 }
@@ -75,7 +76,6 @@ body {
     width: 100%;
     background-repeat: no-repeat;
     background-position: center;
-    background-size: 100% 100%;
     position: relative;
     background-color: transparent;
 }
@@ -122,7 +122,7 @@ body {
     -webkit-text-stroke: 3px black;
     /* Hard solid shadow - Deepened */
     text-shadow: 10px 10px 0px #000000;
-    margin-bottom: -20px;
+    margin-bottom: -40px;
     /* Positive space */
     z-index: 1;
     position: relative;
@@ -132,7 +132,7 @@ body {
 /* New Summary Images */
 .summary-img {
     width: 100%;
-    max-width: 180px;
+    max-width: 280px;
     height: auto;
     z-index: 1;
     position: relative;
@@ -211,15 +211,22 @@ body {
 
 .accomplishments-wrapper {
     flex: 1.4;
+    display: flex;
+    flex-direction: column;
 }
 
 /* Reuse the container bg logic but specific for acc-bg since structure differs slightly */
 .acc-bg {
-    padding: 60px 20px 30px 20px;
-    /* Space for Top Tape */
+
+    padding: 40px 10px 20px 10px;
+    /* Tighter padding maintained */
     display: flex;
     flex-direction: column;
     justify-content: center;
+    flex: 1;
+    /* Stretch to fill wrapper height */
+    width: 100%;
+    /* Ensure full width */
 }
 
 .acc-columns {
@@ -323,30 +330,32 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 20px 30px;
+    padding: 20px 5px;
     /* Adjust padding */
+}
+
+
+
+.badge-name {
+    background-color: #d1f2eb;
+    color: #000;
+    /* Black text */
+    padding: 2px 6px;
+    border-radius: 6px;
+    font-weight: 700;
+    display: inline-block;
 }
 
 .insight-content {
     text-align: center;
-    /* Centered as per reference */
-    font-size: 1.3rem;
-    line-height: 1.5;
+    font-size: 1.2rem;
+    line-height: 2.2;
+    /* Increased generous spacing */
     color: #2d3436;
-    /* Dark text on cream bg */
     font-weight: 600;
     font-family: 'Poppins', sans-serif;
     width: 100%;
-}
-
-.badge-name {
-    background-color: #d1f2eb;
-    color: #10ac84;
-    padding: 3px 10px;
-    border-radius: 8px;
-    font-weight: 800;
-    white-space: nowrap;
-    display: inline-block;
+    width: 100%;
 }
 
 .badge-num {
@@ -360,11 +369,9 @@ body {
     border-radius: 50px;
     padding: 12px 20px;
     text-align: center;
-    font-size: 0.9rem;
+    font-size: 0.8rem;
     color: #636e72;
     box-shadow: 0px 3px 2px rgba(0, 0, 0, 0.05);
-    width: 90%;
-    align-self: center;
     font-weight: 600;
     margin-bottom: 20px;
 }

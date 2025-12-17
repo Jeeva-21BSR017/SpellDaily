@@ -112,14 +112,12 @@
             <!-- Insights (Right) -->
             <div class="insight-wrapper">
                 <div class="insight-content">
-                    <p class="insight-text">
-                        At this learning<br>
-                        rate, <span class="badge-name" id="user-name-2">--</span><br>
-                        is<br>
-                        expected to<br>
-                        master about <span class="badge-num" id="est-words">--</span><br>
-                        new words in the <span id="time-frame">--</span>
-                    </p>
+                    At this learning<br>
+                    rate, <span class="badge-name" id="user-name-2">--</span><br>
+                    expected to<br>
+                    master about <span class="badge-num" id="est-words">--</span><br>
+                    new words in the<br>
+                    <span id="time-frame">--</span>
                 </div>
             </div>
 
@@ -238,9 +236,18 @@
             document.getElementById('percentile-text').textContent = data.user.percentileText;
 
             // Insights
-            document.getElementById('user-name-2').textContent = data.user.name;
-            document.getElementById('est-words').textContent = data.user.learningRate.newWordsCount;
-            document.getElementById('time-frame').textContent = data.user.learningRate.timeFrame;
+            const fullName = data.user.name;
+
+            // Update HTML structure dynamically for Insights
+            const insightHTML = `
+                At this learning<br>
+                rate, <span class="badge-name">${fullName}</span><br>
+                expected to<br>
+                master about <span class="badge-num" id="est-words">${data.user.learningRate.newWordsCount}</span><br>
+                new words in the<br>
+                <span id="time-frame">${data.user.learningRate.timeFrame}</span>
+            `;
+            document.querySelector('.insight-content').innerHTML = insightHTML;
         });
     </script>
 </body>
