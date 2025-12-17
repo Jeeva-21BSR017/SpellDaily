@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spell Daily</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Pattaya&family=Poppins:wght@400;600;700&family=Ultra&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="app-container">
+
+        <!-- Logo -->
+        <div class="logo-wrapper">
+            <img src="assets/logo.svg" alt="Spell Daily" class="app-logo">
+        </div>
+
+        <!-- Summary Section -->
+        <div class="section-wrapper summary-wrapper">
+            <!-- Header Tape -->
+            <div class="section-header-container">
+                <img src="assets/overall.svg" alt="Summary" class="section-header-img header-tape-shadow">
+            </div>
+
+            <!-- Summary Card Container -->
+            <!-- Using SVG as background -->
+            <div class="card-container summary-bg">
+                <div class="summary-columns">
+                    <!-- Column 1 -->
+                    <div class="summary-col">
+                        <div class="number-large" id="practiced-count">--</div>
+                        <img src="assets/words_practiced.svg" alt="Words Practiced" class="summary-img">
+                    </div>
+                    <!-- Column 2 -->
+                    <div class="summary-col">
+                        <div class="number-large" id="correct-count">--</div>
+                        <img src="assets/words_practicedthis_month.svg" alt="Words Correct" class="summary-img">
+                    </div>
+                    <!-- Column 3 -->
+                    <div class="summary-col">
+                        <div class="number-large" id="missed-count">--</div>
+                        <img src="assets/words_missedthis_month.svg" alt="Words Missed" class="summary-img">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Word Bank Section -->
+        <div class="section-wrapper wordbank-wrapper">
+            <div class="section-header-container">
+                <img src="assets/word_bank.svg" alt="Word Bank" class="section-header-img header-tape-shadow">
+            </div>
+
+            <div class="card-container wordbank-bg">
+                <div class="word-grid" id="word-grid">
+                    <!-- Words injected here -->
+                </div>
+                <div class="wordbank-line">
+                    <!-- Dotted line effect if needed, otherwise just border top -->
+                </div>
+                <div class="wordbank-footer">
+                    Marked in red : incorrect answers on the 1<sup>st</sup> attempt
+                </div>
+            </div>
+        </div>
+
+        <!-- Bottom Row -->
+        <div class="bottom-row">
+
+            <!-- Accomplishments -->
+            <div class="section-wrapper accomplishments-wrapper">
+                <div class="section-header-container">
+                    <img src="assets/accomplishments.svg" alt="Accomplishments"
+                        class="section-header-img header-tape-shadow">
+                </div>
+                <!-- Accomplishments Container -->
+                <div class="card-container acc-bg">
+                    <div class="streak-visuals">
+                        <img src="assets/fire.svg" alt="Fire" class="icon-fire">
+                        <div class="streak-number" id="streak-days">--</div>
+                        <!-- "Top 25" -->
+                        <div class="rank-display">
+                            <span class="rank-top">Top</span>
+                            <span class="rank-val" id="rank-val">--</span>
+                        </div>
+                    </div>
+                    <div class="acc-text-group">
+                        <div class="acc-line"><span id="streak-days-text">--</span> <span id="streak-msg">--</span>
+                        </div>
+                        <div class="acc-line"><span class="highlight-name" id="user-name-1">--</span> <span
+                                id="percentile-text">--</span></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Insights (Right) -->
+            <div class="insight-wrapper">
+                <div class="insight-content">
+                    <p class="insight-text">
+                        At this learning<br>
+                        rate, <span class="badge-name" id="user-name-2">--</span><br>
+                        is<br>
+                        expected to<br>
+                        master about <span class="badge-num" id="est-words">--</span><br>
+                        new words in the <span id="time-frame">--</span>
+                    </p>
+                </div>
+            </div>
+
+        </div>
+
+        <footer class="app-footer">
+            <!-- Using bottomtext_container.svg if available, otherwise just styled pill -->
+            <!-- The user didn't mention this specifically but "all space box" implies it. -->
+            <!-- I'll stick to CSS pill for footer text as it's cleaner unless SVG is needed. -->
+            <div class="footer-content">
+                Note for Parents : Even mastered words can be misspelled. Regular practice and celebrating small wins
+                help maintain progress!
+            </div>
+        </footer>
+
+    </div>
+
+    <!-- Script with Embedded Data -->
+    <script>
+        // Embedded Data to ensure it shows up without a server/CORS issues
+        const mockData = {
+            "user": {
+                "name": "Desik Mouriya",
+                "streakDays": 36,
+                "streakMessage": "days - unstoppable consistency !",
+                "rankTitle": "Top 25",
+                "percentileText": "is in the top 35% of learners",
+                "learningRate": {
+                    "newWordsCount": 65,
+                    "timeFrame": "coming month"
+                }
+            },
+            "summary": {
+                "practiced": 62,
+                "correctFirstAttempt": 27,
+                "missedFirstAttempt": 35
+            },
+            "wordBank": [
+                { "word": "Foreign", "correct": false },
+                { "word": "Opinion", "correct": true },
+                { "word": "Angry", "correct": true },
+                { "word": "Pillow", "correct": false },
+                { "word": "Simple", "correct": true },
+                { "word": "Temple", "correct": true },
+                { "word": "Mirror", "correct": false },
+                { "word": "Music", "correct": false },
+                { "word": "Children", "correct": true },
+                { "word": "Dancer", "correct": true },
+                { "word": "Evening", "correct": true },
+                { "word": "Group", "correct": false },
+                { "word": "Stories", "correct": false },
+                { "word": "Vegetable", "correct": false },
+                { "word": "Apartment", "correct": false },
+                { "word": "Autumn", "correct": false },
+                { "word": "Believe", "correct": false },
+                { "word": "Fifteen", "correct": true },
+                { "word": "Bicycle", "correct": false },
+                { "word": "Business", "correct": false },
+                { "word": "Career", "correct": false },
+                { "word": "Celebrate", "correct": true },
+                { "word": "Change", "correct": true },
+                { "word": "College", "correct": false },
+                { "word": "Compare", "correct": true },
+                { "word": "Complete", "correct": true },
+                { "word": "Create", "correct": true },
+                { "word": "Conversation", "correct": false },
+                { "word": "Correct", "correct": false },
+                { "word": "Country", "correct": false },
+                { "word": "Culture", "correct": false },
+                { "word": "Dangerous", "correct": false },
+                { "word": "Decide", "correct": false },
+                { "word": "Delicious", "correct": false },
+                { "word": "Describe", "correct": false },
+                { "word": "Difference", "correct": false },
+                { "word": "Difficult", "correct": false }
+            ]
+        };
+
+        // Render Function
+        document.addEventListener('DOMContentLoaded', async () => {
+            // Try to load from data.json first, fallback to mockData
+            let data = mockData;
+            try {
+                const response = await fetch('data.json');
+                if (response.ok) {
+                    data = await response.json();
+                }
+            } catch (e) {
+                console.log('Using embedded data');
+            }
+
+            // Summary
+            document.getElementById('practiced-count').textContent = data.summary.practiced;
+            document.getElementById('correct-count').textContent = data.summary.correctFirstAttempt;
+            document.getElementById('missed-count').textContent = data.summary.missedFirstAttempt;
+
+            // Word Bank
+            const grid = document.getElementById('word-grid');
+            data.wordBank.forEach(w => {
+                const div = document.createElement('div');
+                div.textContent = w.word;
+                div.className = w.correct ? 'word-item' : 'word-item incorrect';
+                grid.appendChild(div);
+            });
+
+            // Accomplishments
+            document.getElementById('streak-days').textContent = data.user.streakDays;
+
+            const rankStr = data.user.rankTitle || "Top 25";
+            const rankNum = rankStr.replace('Top', '').trim();
+            document.getElementById('rank-val').textContent = rankNum;
+
+            document.getElementById('streak-days-text').textContent = data.user.streakDays + " days";
+            document.getElementById('streak-msg').textContent = data.user.streakMessage;
+            document.getElementById('user-name-1').textContent = data.user.name;
+            document.getElementById('percentile-text').textContent = data.user.percentileText;
+
+            // Insights
+            document.getElementById('user-name-2').textContent = data.user.name;
+            document.getElementById('est-words').textContent = data.user.learningRate.newWordsCount;
+            document.getElementById('time-frame').textContent = data.user.learningRate.timeFrame;
+        });
+    </script>
+</body>
+
+</html>
