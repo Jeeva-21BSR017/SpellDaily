@@ -411,6 +411,9 @@ body {
         font-size: 4rem;
         /* Smaller for mobile */
         margin-bottom: -15px;
+        text-shadow: 4px 4px 0px #000000;
+        /* Reduced shadow */
+        -webkit-text-stroke: 1.5px black;
     }
 
     .summary-img {
@@ -438,6 +441,9 @@ body {
     .streak-number,
     .rank-val {
         font-size: 4rem;
+        text-shadow: 4px 4px 0px #000000;
+        /* Reduced shadow */
+        -webkit-text-stroke: 1.5px black;
     }
 
     .rank-top {
