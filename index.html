@@ -66,7 +66,7 @@
                     <!-- Dotted line effect if needed, otherwise just border top -->
                 </div>
                 <div class="wordbank-footer">
-                    Marked in red : incorrect answers on the 1<sup>st</sup> attempt
+                    Marked in red : incorrect answers on the 1<sup> st</sup> attempt
                 </div>
             </div>
         </div>
@@ -82,20 +82,29 @@
                 </div>
                 <!-- Accomplishments Container -->
                 <div class="card-container acc-bg">
-                    <div class="streak-visuals">
-                        <img src="assets/fire.svg" alt="Fire" class="icon-fire">
-                        <div class="streak-number" id="streak-days">--</div>
-                        <!-- "Top 25" -->
-                        <div class="rank-display">
-                            <span class="rank-top">Top</span>
-                            <span class="rank-val" id="rank-val">--</span>
+                    <div class="acc-columns">
+                        <!-- Left: Streak -->
+                        <div class="acc-col">
+                            <div class="streak-visuals">
+                                <img src="assets/fire.svg" alt="Fire" class="icon-fire">
+                                <div class="streak-number" id="streak-days">--</div>
+                            </div>
+                            <div class="acc-text">
+                                <span id="streak-days-text">--</span> <span id="streak-msg">--</span>
+                            </div>
                         </div>
-                    </div>
-                    <div class="acc-text-group">
-                        <div class="acc-line"><span id="streak-days-text">--</span> <span id="streak-msg">--</span>
+
+                        <!-- Right: Rank -->
+                        <div class="acc-col">
+                            <div class="rank-visuals">
+                                <span class="rank-top">Top</span>
+                                <span class="rank-val" id="rank-val">--</span>
+                            </div>
+                            <div class="acc-text">
+                                <span class="highlight-name" id="user-name-1">--</span> <span
+                                    id="percentile-text">--</span>
+                            </div>
                         </div>
-                        <div class="acc-line"><span class="highlight-name" id="user-name-1">--</span> <span
-                                id="percentile-text">--</span></div>
                     </div>
                 </div>
             </div>
