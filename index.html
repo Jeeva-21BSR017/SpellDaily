@@ -135,84 +135,24 @@
 
     </div>
 
-    <!-- Script with Embedded Data -->
-    <script>
-        // Embedded Data to ensure it shows up without a server/CORS issues
-        const mockData = {
-            "user": {
-                "name": "Desik Mouriya",
-                "streakDays": 36,
-                "streakMessage": "days - unstoppable consistency !",
-                "rankTitle": "Top 25",
-                "percentileText": "is in the top 35% of learners",
-                "learningRate": {
-                    "newWordsCount": 65,
-                    "timeFrame": "coming month"
-                }
-            },
-            "summary": {
-                "practiced": 62,
-                "correctFirstAttempt": 27,
-                "missedFirstAttempt": 35
-            },
-            "wordBank": [
-                { "word": "Foreign", "correct": false },
-                { "word": "Opinion", "correct": true },
-                { "word": "Angry", "correct": true },
-                { "word": "Pillow", "correct": false },
-                { "word": "Simple", "correct": true },
-                { "word": "Temple", "correct": true },
-                { "word": "Mirror", "correct": false },
-                { "word": "Music", "correct": false },
-                { "word": "Children", "correct": true },
-                { "word": "Dancer", "correct": true },
-                { "word": "Evening", "correct": true },
-                { "word": "Group", "correct": false },
-                { "word": "Stories", "correct": false },
-                { "word": "Vegetable", "correct": false },
-                { "word": "Apartment", "correct": false },
-                { "word": "Autumn", "correct": false },
-                { "word": "Believe", "correct": false },
-                { "word": "Fifteen", "correct": true },
-                { "word": "Bicycle", "correct": false },
-                { "word": "Business", "correct": false },
-                { "word": "Career", "correct": false },
-                { "word": "Celebrate", "correct": true },
-                { "word": "Change", "correct": true },
-                { "word": "College", "correct": false },
-                { "word": "Compare", "correct": true },
-                { "word": "Complete", "correct": true },
-                { "word": "Create", "correct": true },
-                { "word": "Conversation", "correct": false },
-                { "word": "Correct", "correct": false },
-                { "word": "Country", "correct": false },
-                { "word": "Culture", "correct": false },
-                { "word": "Dangerous", "correct": false },
-                { "word": "Decide", "correct": false },
-                { "word": "Delicious", "correct": false },
-                { "word": "Describe", "correct": false },
-                { "word": "Difference", "correct": false },
-                { "word": "Difficult", "correct": false }
-            ]
-        };
+    <!-- Load Data Script -->
+    <script src="data.js"></script>
 
+    <!-- Main Logic -->
+    <script>
         // Render Function
-        document.addEventListener('DOMContentLoaded', async () => {
-            // Try to load from data.json first, fallback to mockData
-            let data = mockData;
-            try {
-                const response = await fetch('data.json');
-                if (response.ok) {
-                    data = await response.json();
-                }
-            } catch (e) {
-                console.log('Using embedded data');
-            }
+        document.addEventListener('DOMContentLoaded', () => {
+            // Use the global appData object loaded from data.js
+            const data = appData;
 
             // Summary
-            document.getElementById('practiced-count').textContent = data.summary.practiced;
-            document.getElementById('correct-count').textContent = data.summary.correctFirstAttempt;
-            document.getElementById('missed-count').textContent = data.summary.missedFirstAttempt;
+            const practiced = data.summary.practiced;
+            const correct = data.summary.correctFirstAttempt;
+            const missed = practiced - correct; // Automatically calculate missed
+
+            document.getElementById('practiced-count').textContent = practiced;
+            document.getElementById('correct-count').textContent = correct;
+            document.getElementById('missed-count').textContent = missed;
 
             // Word Bank
             const grid = document.getElementById('word-grid');
