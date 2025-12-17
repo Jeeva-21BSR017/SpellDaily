@@ -2,7 +2,7 @@ const appData = {
     "user": {
         "name": "Jeeva",
         "streakDays": 36,
-        "streakMessage": "days - unstoppable consistency !",
+        "streakMessage": "unstoppable consistency !",
         "rankTitle": "Top 25",
         "percentileText": "is in the top 35% of learners",
         "learningRate": {

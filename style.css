@@ -250,7 +250,6 @@ body {
     /* Bottom align reference */
     justify-content: center;
     gap: 0px;
-    margin-bottom: 5px;
     height: 90px;
     /* Ensure height for staggering */
 }
@@ -392,5 +391,61 @@ body {
 
     .summary-bg {
         padding: 60px 20px 30px 20px;
+    }
+}
+
+/* Mobile Specific Tweaks (< 600px) */
+@media (max-width: 600px) {
+    .summary-columns {
+        flex-direction: column;
+        gap: 50px;
+        /* Generous gap for stacked items */
+        align-items: center;
+    }
+
+    .summary-col {
+        width: 100%;
+    }
+
+    .number-large {
+        font-size: 4rem;
+        /* Smaller for mobile */
+        margin-bottom: -15px;
+    }
+
+    .summary-img {
+        max-width: 220px;
+        /* Scale down images */
+    }
+
+    .word-grid {
+        grid-template-columns: repeat(2, 1fr);
+        /* 2 Columns for small screens */
+        grid-gap: 10px;
+    }
+
+    .acc-columns {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 40px;
+    }
+
+    .acc-col {
+        width: 100%;
+    }
+
+    .streak-number,
+    .rank-val {
+        font-size: 4rem;
+    }
+
+    .rank-top {
+        font-size: 2.5rem;
+    }
+
+    .acc-bg,
+    .insight-wrapper {
+        padding: 30px 15px;
     }
 }
