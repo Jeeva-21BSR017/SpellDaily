@@ -133,6 +133,23 @@
 
     <!-- Load Data Script -->
     <script src="data.js"></script>
+    <script src="assets_data.js"></script>
+    <script>
+        // Pre-load images with Base64 data to avoid Tainted Canvas error in PDF generation
+        document.addEventListener('DOMContentLoaded', () => {
+            if (typeof embeddedAssets !== 'undefined') {
+                const images = document.querySelectorAll('img');
+                images.forEach(img => {
+                    const rawSrc = img.getAttribute('src');
+                    // Handle potential URL encoding or leading ./
+                    const key = rawSrc.replace(/^\.\//, '');
+                    if (embeddedAssets[key]) {
+                        img.src = embeddedAssets[key];
+                    }
+                });
+            }
+        });
+    </script>
 
     <!-- Main Logic -->
     <script>
@@ -303,6 +320,27 @@
             const btn = document.getElementById('download-btn');
             btn.style.display = 'none'; // Hide button
 
+            // --- FIX: Swap all images (including dynamic ones) to Base64 BEFORE cloning ---
+            if (typeof embeddedAssets !== 'undefined') {
+                console.log("downloadPDF: Swapping dynamic images to Base64...");
+                const images = document.querySelectorAll('img');
+                images.forEach(img => {
+                    const rawSrc = img.getAttribute('src');
+                    // Skip if already base64 or missing
+                    if (!rawSrc || rawSrc.startsWith('data:')) return;
+
+                    // Normalize path: ./assets/foo.svg -> assets/foo.svg
+                    let key = rawSrc.replace(/^\.\//, '').replace(/^\//, '');
+
+                    if (embeddedAssets[key]) {
+                        img.src = embeddedAssets[key];
+                    } else {
+                        console.warn("downloadPDF: No base64 asset found for:", key);
+                    }
+                });
+            }
+            // -------------------------------------------------------------------------------
+
             try {
                 const { jsPDF } = window.jspdf;
                 // A4 dimensions in mm: 210 x 297
@@ -364,6 +402,11 @@
                 let heightLeft = imgHeightInPdf;
                 let position = 0;
                 let pageCount = 0;
+
+                // Center vertically if content fits on one page
+                if (imgHeightInPdf < pdfHeight) {
+                    position = (pdfHeight - imgHeightInPdf) / 2;
+                }
 
                 while (heightLeft > 0) {
                     if (pageCount > 0) pdf.addPage();

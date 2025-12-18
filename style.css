@@ -903,7 +903,7 @@ body {
     .card-container .streak-num {
         font-size: 3.5rem !important;
         left: 50% !important;
-        top: 25px !important;
+        top: 80px !important;
         transform: translateX(-25%) !important;
         text-shadow: 4px 4px 0px #000 !important;
     }
