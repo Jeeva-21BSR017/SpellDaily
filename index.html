@@ -12,64 +12,7 @@
         rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <style>
-        /* CRITICAL MOBILE OVERRIDES - INJECTED FOR STABILITY */
-        @media (max-width: 900px) {
-
-            /* Stack Columns */
-            .accomplishments-wrapper .acc-columns {
-                flex-direction: column !important;
-                gap: 50px !important;
-            }
-
-            .accomplishments-wrapper .acc-col {
-                width: 100% !important;
-            }
-
-            /* Container Adjustments */
-            .acc-bg {
-                padding: 40px 15px !important;
-                height: auto !important;
-            }
-
-            /* Force Visuals containment */
-            .streak-visuals {
-                height: 120px !important;
-                margin-bottom: 30px !important;
-                /* Space for text */
-                width: 100% !important;
-                display: flex !important;
-                justify-content: center !important;
-                align-items: center !important;
-            }
-
-            /* Icons - Centered & Contained */
-            .icon-fire,
-            .icon-bullseye {
-                position: absolute !important;
-                top: 0 !important;
-                left: 50% !important;
-                right: auto !important;
-                width: 100px !important;
-                transform: translateX(-80%) !important;
-                /* Keep overlap logic */
-            }
-
-            /* Numbers - Centered & Contained */
-            .streak-num {
-                position: relative !important;
-                left: 50% !important;
-                top: 25px !important;
-                font-size: 3.5rem !important;
-                transform: translateX(-25%) !important;
-                /* Overlap right */
-                margin-bottom: 0 !important;
-            }
-
-            .acc-text-block {
-                margin-top: 10px !important;
-                font-size: 0.9rem !important;
-            }
-        }
+        /* Mobile overrides removed to allow side-by-side layout from style.css */
     </style>
 </head>
 

@@ -2,7 +2,7 @@
 const appData = {
     "user": {
         "name": "Jeeva",
-        "streakDays": 35,
+        "streakDays": 36,
         "streakMessage": "unstoppable consistency !",
         "perfectDays": 16,
         "rankTitle": "Top 25",
@@ -13,8 +13,8 @@ const appData = {
         }
     },
     "summary": {
-        "practiced": 61,
-        "correctFirstAttempt": 27
+        "practiced": 67,
+        "correctFirstAttempt": 25
     },
     "wordBank": [
         {

@@ -462,15 +462,19 @@ body {
         grid-gap: 10px;
     }
 
-    .acc-columns {
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        gap: 40px;
+    .accomplishments-wrapper .acc-columns {
+        flex-direction: row !important;
+        justify-content: center !important;
+        align-items: flex-start !important;
+        gap: 10px !important;
+        margin-top: 15px !important;
     }
 
-    .acc-col {
-        width: 100%;
+    .accomplishments-wrapper .acc-col {
+        width: 48% !important;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
     }
 
     .bottom-row {
@@ -488,9 +492,7 @@ body {
         /* Reasonable mobile size */
     }
 
-    .acc-col {
-        width: 100%;
-    }
+    /* Redundant .acc-col removed */
 
     .streak-number,
     .rank-val {
@@ -518,45 +520,66 @@ body {
         /* Scale down ribbons */
     }
 
-    .card-tape-img {
-        height: 50px;
+    /* Accomplishments Mobile Scaling - Perfect Center Alignment */
+    .acc-bg {
+        padding: 35px 5px 20px 5px !important;
+        background-image: none !important;
+        background-color: #fffaf0 !important;
+        border-radius: 30px !important;
+        box-shadow: 0px 4px 0px rgba(0, 0, 0, 0.15) !important;
+        height: auto !important;
     }
 
-    /* Accomplishments Mobile Scaling - High Specificity Force */
     .card-container .streak-visuals {
-        height: 130px !important;
-        margin-bottom: 20px !important;
+        height: 80px !important;
+        /* Compact height */
+        margin-bottom: 25px !important;
+        width: 100% !important;
+        position: relative !important;
     }
 
+    /* Cluster Icon to the Left of Center */
     .card-container .icon-fire {
-        width: 100px !important;
-        top: 10px !important;
+        width: 65px !important;
+        top: 0px !important;
         left: 50% !important;
         right: auto !important;
         transform: translateX(-80%) !important;
+        /* Push left mostly */
+        z-index: 1 !important;
     }
 
     .card-container .icon-bullseye {
-        width: 110px !important;
-        top: 10px !important;
+        width: 75px !important;
+        top: 0px !important;
         left: 50% !important;
         right: auto !important;
         transform: translateX(-80%) !important;
+        z-index: 1 !important;
     }
 
+    /* Cluster Number to the Right of Center - overlap right edge of icon */
     .card-container .streak-num {
-        font-size: 3.5rem !important;
+        font-size: 2.5rem !important;
+        position: absolute !important;
+        /* Ensure absolute positioning */
         left: 50% !important;
-        top: 25px !important;
-        transform: translateX(-25%) !important;
+        top: 20px !important;
+        /* Align vertically with center of icon */
+        transform: translateX(-15%) !important;
+        /* Sit slightly left of center line, overlapping icon edge */
+        text-shadow: 3px 3px 0px #000000 !important;
+        z-index: 10 !important;
+        white-space: nowrap !important;
     }
 
     .acc-text-block {
-        font-size: 0.8rem;
-    }
-
-    .acc-bg {
-        padding: 40px 15px 30px 15px;
+        font-size: 0.72rem !important;
+        padding: 0 4px !important;
+        margin-top: 5px !important;
+        line-height: 1.25 !important;
+        font-weight: 700 !important;
+        text-align: center !important;
     }
 }
 
@@ -853,12 +876,44 @@ body {
         /* Vertical stack gap */
     }
 }
+
 /* FINAL MOBILE OVERRIDE - FORCE FIX */
 @media (max-width: 900px) {
-    .card-container .streak-visuals { height: 130px !important; margin-bottom: 25px !important; }
-    .card-container .icon-fire { width: 100px !important; top: 10px !important; left: 50% !important; right: auto !important; transform: translateX(-80%) !important; }
-    .card-container .icon-bullseye { width: 110px !important; top: 10px !important; left: 50% !important; right: auto !important; transform: translateX(-80%) !important; }
-    .card-container .streak-num { font-size: 3.5rem !important; left: 50% !important; top: 25px !important; transform: translateX(-25%) !important; text-shadow: 4px 4px 0px #000 !important; }
-    .acc-col { width: 100% !important; }
-    .acc-columns { flex-direction: column !important; justify-content: center !important; }
+    .card-container .streak-visuals {
+        height: 130px !important;
+        margin-bottom: 25px !important;
+    }
+
+    .card-container .icon-fire {
+        width: 100px !important;
+        top: 10px !important;
+        left: 50% !important;
+        right: auto !important;
+        transform: translateX(-80%) !important;
+    }
+
+    .card-container .icon-bullseye {
+        width: 110px !important;
+        top: 10px !important;
+        left: 50% !important;
+        right: auto !important;
+        transform: translateX(-80%) !important;
+    }
+
+    .card-container .streak-num {
+        font-size: 3.5rem !important;
+        left: 50% !important;
+        top: 25px !important;
+        transform: translateX(-25%) !important;
+        text-shadow: 4px 4px 0px #000 !important;
+    }
+
+    .acc-col {
+        width: 100% !important;
+    }
+
+    .acc-columns {
+        flex-direction: column !important;
+        justify-content: center !important;
+    }
 }
