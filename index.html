@@ -11,6 +11,9 @@
         href="https://fonts.googleapis.com/css2?family=Pattaya&family=Poppins:wght@400;600;700&family=Ultra&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+    <style>
+        /* Mobile overrides removed to allow side-by-side layout from style.css */
+    </style>
 </head>
 
 <body>
@@ -22,31 +25,34 @@
             <img src="assets/logo.svg" alt="Spell Daily" class="app-logo">
         </div>
 
-        <!-- Summary Section -->
         <div class="section-wrapper summary-wrapper">
-            <!-- Header Tape -->
-            <div class="section-header-container">
-                <img src="assets/overall.svg" alt="Summary" class="section-header-img header-tape-shadow">
-            </div>
-
-            <!-- Summary Card Container -->
-            <!-- Using SVG as background -->
-            <div class="card-container summary-bg">
-                <div class="summary-columns">
-                    <!-- Column 1 -->
-                    <div class="summary-col">
+            <div class="summary-split-container">
+                <!-- Card 1: Overall -->
+                <div class="summary-card">
+                    <div class="card-tape-wrapper">
+                        <img src="assets/overall.svg" alt="Overall" class="card-tape-img">
+                    </div>
+                    <div class="summary-content-col">
                         <div class="number-large" id="practiced-count">--</div>
-                        <img src="assets/words_practiced.svg" alt="Words Practiced" class="summary-img">
+                        <img src="assets/words_practiced.svg" alt="Words Practiced" class="summary-img-label">
                     </div>
-                    <!-- Column 2 -->
-                    <div class="summary-col">
-                        <div class="number-large" id="correct-count">--</div>
-                        <img src="assets/words_practicedthis_month.svg" alt="Words Correct" class="summary-img">
+                </div>
+
+                <!-- Card 2: This Month -->
+                <div class="summary-card">
+                    <div class="card-tape-wrapper">
+                        <img src="assets/this_month.svg" alt="This Month" class="card-tape-img">
                     </div>
-                    <!-- Column 3 -->
-                    <div class="summary-col">
-                        <div class="number-large" id="missed-count">--</div>
-                        <img src="assets/words_missedthis_month.svg" alt="Words Missed" class="summary-img">
+                    <div class="summary-content-row">
+                        <div class="summary-sub-col">
+                            <div class="number-large" id="correct-count">--</div>
+                            <img src="assets/words_practicedthis_month.svg" alt="Words Correct"
+                                class="summary-img-label">
+                        </div>
+                        <div class="summary-sub-col">
+                            <div class="number-large" id="missed-count">--</div>
+                            <img src="assets/words_missedthis_month.svg" alt="Words Missed" class="summary-img-label">
+                        </div>
                     </div>
                 </div>
             </div>
@@ -61,9 +67,6 @@
             <div class="card-container wordbank-bg">
                 <div class="word-grid" id="word-grid">
                     <!-- Words injected here -->
-                </div>
-                <div class="wordbank-line">
-                    <!-- Dotted line effect if needed, otherwise just border top -->
                 </div>
                 <div class="wordbank-footer">
                     Marked in red : incorrect answers on the 1<sup> st</sup> attempt
@@ -86,39 +89,32 @@
                         <!-- Left: Streak -->
                         <div class="acc-col">
                             <div class="streak-visuals">
-                                <img src="assets/fire.svg" alt="Fire" class="icon-fire">
-                                <div class="streak-number" id="streak-days">--</div>
+                                <img src="assets/fire.svg" alt="Fire" class="icon-visual icon-fire">
+                                <div class="number-large streak-num" id="streak-days">--</div>
                             </div>
-                            <div class="acc-text">
-                                <span id="streak-days-text">--</span> <span id="streak-msg">--</span>
+                            <!-- Text moved outside/below visuals -->
+                            <div class="acc-text-block">
+                                <span id="streak-days-text">--</span> - <span id="streak-msg">--</span>
                             </div>
                         </div>
 
-                        <!-- Right: Rank -->
+                        <!-- Right: Bullseye -->
                         <div class="acc-col">
-                            <div class="rank-visuals">
-                                <span class="rank-top">Top</span>
-                                <span class="rank-val" id="rank-val">--</span>
+                            <div class="streak-visuals">
+                                <img src="assets/bullseye.svg" alt="Bullseye" class="icon-visual icon-bullseye">
+                                <div class="number-large streak-num" id="bullseye-count">--</div>
                             </div>
-                            <div class="acc-text">
-                                <span class="highlight-name" id="user-name-1">--</span> <span
-                                    id="percentile-text">--</span>
+                            <div class="acc-text-block">
+                                A bullseye means your child completed the day's tasks with zero mistakes.
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Insights (Right) -->
-            <div class="insight-wrapper">
-                <div class="insight-content">
-                    At this learning<br>
-                    rate, <span class="badge-name" id="user-name-2">--</span><br>
-                    expected to<br>
-                    master about <span class="badge-num" id="est-words">--</span><br>
-                    new words in the<br>
-                    <span id="time-frame">--</span>
-                </div>
+            <!-- Cup Section (Replaces Insights) -->
+            <div class="cup-wrapper">
+                <img src="assets/cup.svg" alt="Trophy" class="cup-img">
             </div>
 
         </div>
@@ -137,6 +133,23 @@
 
     <!-- Load Data Script -->
     <script src="data.js"></script>
+    <script src="assets_data.js"></script>
+    <script>
+        // Pre-load images with Base64 data to avoid Tainted Canvas error in PDF generation
+        document.addEventListener('DOMContentLoaded', () => {
+            if (typeof embeddedAssets !== 'undefined') {
+                const images = document.querySelectorAll('img');
+                images.forEach(img => {
+                    const rawSrc = img.getAttribute('src');
+                    // Handle potential URL encoding or leading ./
+                    const key = rawSrc.replace(/^\.\//, '');
+                    if (embeddedAssets[key]) {
+                        img.src = embeddedAssets[key];
+                    }
+                });
+            }
+        });
+    </script>
 
     <!-- Main Logic -->
     <script>
@@ -166,29 +179,255 @@
             // Accomplishments
             document.getElementById('streak-days').textContent = data.user.streakDays;
 
-            const rankStr = data.user.rankTitle || "Top 25";
-            const rankNum = rankStr.replace('Top', '').trim();
-            document.getElementById('rank-val').textContent = rankNum;
+            // Bullseye Logic (Mapping 'correctFirstAttempt' to bullseye for now)
+            // In a real app this might be a separate specific 'perfect days' counter
+            document.getElementById('bullseye-count').textContent = data.summary.correctFirstAttempt;
 
             document.getElementById('streak-days-text').textContent = data.user.streakDays + " days";
             document.getElementById('streak-msg').textContent = data.user.streakMessage;
-            document.getElementById('user-name-1').textContent = data.user.name;
-            document.getElementById('percentile-text').textContent = data.user.percentileText;
 
-            // Insights
-            const fullName = data.user.name;
-
-            // Update HTML structure dynamically for Insights
-            const insightHTML = `
-                At this learning<br>
-                rate, <span class="badge-name">${fullName}</span><br>
-                expected to<br>
-                master about <span class="badge-num" id="est-words">${data.user.learningRate.newWordsCount}</span><br>
-                new words in the<br>
-                <span id="time-frame">${data.user.learningRate.timeFrame}</span>
-            `;
-            document.querySelector('.insight-content').innerHTML = insightHTML;
+            <!-- Removed old Rank/Insights logic as UI replaced it -->
         });
+    </script>
+
+    <!-- Page 2: Progress Section (Appended for Single Report Flow) -->
+    <!-- Ideally this is a separate "page" visual block -->
+    <div class="page-break-marker"></div> <!-- For PDF logic later -->
+
+    <div class="app-container progress-page-container" id="page-2-container">
+        <!-- Progress Header -->
+        <div class="section-wrapper progress-header-wrapper">
+            <div class="section-header-container">
+                <img src="assets/progress_heading.svg" alt="Progress" class="progress-header-img">
+            </div>
+        </div>
+
+        <!-- Progress Content Container -->
+        <div class="progress-list" id="progress-container">
+            <!-- Content will be injected by JS -->
+        </div>
+    </div>
+
+    <!-- Scripts for Page 2 Logic -->
+    <script src="Page2/data.js"></script>
+    <script>
+        // Render Page 2 Content
+        document.addEventListener('DOMContentLoaded', () => {
+            const container = document.getElementById('progress-container');
+            if (!container) return;
+
+            let htmlContent = '';
+
+            // Ensure progressData is available (from Page2/data.js)
+            if (typeof progressData !== 'undefined') {
+                progressData.forEach(row => {
+                    if (row.type === 'full') {
+                        // Render Full Width Card
+                        const cardData = row.cards[0];
+                        htmlContent += `
+                            <div class="progress-card">
+                                <div class="progress-table">
+                                    <div class="table-row header-row">
+                                        ${cardData.headers.map(h => `<div class="table-cell">${h}</div>`).join('')}
+                                    </div>
+                                    <div class="table-row word-row">
+                                        ${cardData.words.map(w => `<div class="table-cell ${w.correct ? 'correct' : 'incorrect'}">${w.text}</div>`).join('')}
+                                    </div>
+                                </div>
+                                ${cardData.footer ? `<div class="card-footer-text">${cardData.footer}</div>` : ''}
+                            </div>
+                        `;
+                    } else if (row.type === 'split') {
+                        // Render Split Row
+                        htmlContent += `<div class="progress-split-row">`;
+
+                        row.cards.forEach(cardData => {
+                            htmlContent += `
+                                <div class="progress-card split-card">
+                                    <div class="progress-table">
+                                        <div class="table-row header-row">
+                                            ${cardData.headers.map(h => `<div class="table-cell">${h}</div>`).join('')}
+                                        </div>
+                                        <div class="table-row word-row">
+                                            ${cardData.words.map(w => `<div class="table-cell ${w.correct ? 'correct' : 'incorrect'}">${w.text}</div>`).join('')}
+                                        </div>
+                                    </div>
+                                </div>
+                            `;
+                        });
+
+                        htmlContent += `</div>`;
+                        if (row.footer) {
+                            htmlContent += `<div class="split-footer-text">${row.footer}</div>`;
+                        }
+                    }
+                });
+
+                // Add Footer Note
+                if (typeof footerNoteText !== 'undefined') {
+                    htmlContent += `
+                        <div class="footer-note">
+                            ${footerNoteText}
+                        </div>
+                    `;
+                }
+            }
+
+            container.innerHTML = htmlContent;
+        });
+    </script>
+
+    <!-- PDF Generation Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+    <!-- Floating Download Button -->
+    <button id="download-btn" onclick="downloadPDF()">Download Report</button>
+
+    <style>
+        #download-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            padding: 12px 24px;
+            background-color: #fff;
+            color: #8C52FF;
+            border: 2px solid #8C52FF;
+            border-radius: 50px;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            z-index: 9999;
+            transition: all 0.3s ease;
+        }
+
+        #download-btn:hover {
+            background-color: #8C52FF;
+            color: #fff;
+            transform: translateY(-2px);
+        }
+
+        /* Visual separation on screen */
+        .page-break-marker {
+            height: 50px;
+            width: 100%;
+        }
+    </style>
+
+    <script>
+        async function downloadPDF() {
+            const btn = document.getElementById('download-btn');
+            btn.style.display = 'none'; // Hide button
+
+            // --- FIX: Swap all images (including dynamic ones) to Base64 BEFORE cloning ---
+            if (typeof embeddedAssets !== 'undefined') {
+                console.log("downloadPDF: Swapping dynamic images to Base64...");
+                const images = document.querySelectorAll('img');
+                images.forEach(img => {
+                    const rawSrc = img.getAttribute('src');
+                    // Skip if already base64 or missing
+                    if (!rawSrc || rawSrc.startsWith('data:')) return;
+
+                    // Normalize path: ./assets/foo.svg -> assets/foo.svg
+                    let key = rawSrc.replace(/^\.\//, '').replace(/^\//, '');
+
+                    if (embeddedAssets[key]) {
+                        img.src = embeddedAssets[key];
+                    } else {
+                        console.warn("downloadPDF: No base64 asset found for:", key);
+                    }
+                });
+            }
+            // -------------------------------------------------------------------------------
+
+            try {
+                const { jsPDF } = window.jspdf;
+                // A4 dimensions in mm: 210 x 297
+                const pdf = new jsPDF('p', 'mm', 'a4');
+                const pdfWidth = pdf.internal.pageSize.getWidth();
+                const pdfHeight = pdf.internal.pageSize.getHeight();
+
+                // 1. Create a merged logic wrapper
+                const mergedContainer = document.createElement('div');
+                Object.assign(mergedContainer.style, {
+                    position: 'fixed',
+                    left: '-9999px',
+                    top: '0',
+                    width: '1200px', // Desktop width
+                    backgroundColor: '#8C52FF',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center',
+                    gap: '40px',
+                    padding: '40px',
+                    zIndex: '-999'
+                });
+
+                // 2. Clone Content
+                const page1Orig = document.querySelector('.app-container');
+                const page2Orig = document.getElementById('page-2-container');
+
+                if (page1Orig) mergedContainer.appendChild(page1Orig.cloneNode(true));
+                if (page2Orig) mergedContainer.appendChild(page2Orig.cloneNode(true));
+
+                // FIX: Force Header Overlap for PDF Capture
+                // html2canvas sometimes struggles with negative margins in flexbox.
+                // We manually pull them closer in the clone.
+                const headers = mergedContainer.querySelectorAll('.section-header-container');
+                headers.forEach(header => {
+                    header.style.marginBottom = '-45px'; // Increased negative margin
+                    header.style.position = 'relative';
+                    header.style.zIndex = '100'; // Ensure on top
+                });
+
+                document.body.appendChild(mergedContainer);
+
+                // 3. Capture
+                const canvas = await html2canvas(mergedContainer, {
+                    scale: 2,
+                    useCORS: true,
+                    backgroundColor: '#8C52FF',
+                    logging: false,
+                    windowWidth: 1200
+                });
+
+                document.body.removeChild(mergedContainer);
+
+                // 4. Print
+                const imgData = canvas.toDataURL('image/png');
+                const imgProps = pdf.getImageProperties(imgData);
+                const imgHeightInPdf = (imgProps.height * pdfWidth) / imgProps.width;
+
+                let heightLeft = imgHeightInPdf;
+                let position = 0;
+                let pageCount = 0;
+
+                // Center vertically if content fits on one page
+                if (imgHeightInPdf < pdfHeight) {
+                    position = (pdfHeight - imgHeightInPdf) / 2;
+                }
+
+                while (heightLeft > 0) {
+                    if (pageCount > 0) pdf.addPage();
+                    pdf.setFillColor('#8C52FF');
+                    pdf.rect(0, 0, pdfWidth, pdfHeight, 'F');
+
+                    pdf.addImage(imgData, 'PNG', 0, position, pdfWidth, imgHeightInPdf);
+                    heightLeft -= pdfHeight;
+                    position -= pdfHeight;
+                    pageCount++;
+                }
+
+                pdf.save('SpellDaily_Report.pdf');
+
+            } catch (err) {
+                console.error("PDF generation failed:", err);
+                alert("Failed to generate PDF.");
+            } finally {
+                btn.style.display = 'block';
+            }
+        }
     </script>
 </body>
 
