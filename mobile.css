@@ -1,0 +1,91 @@
+/* Dedicated Mobile Styles - Applied via HTML media attribute */
+
+/* Force column layout for top section */
+.top-row-split {
+    flex-direction: column !important;
+    gap: 20px !important;
+}
+
+/* Force full width on columns */
+.col-narrow,
+.col-wide {
+    width: 100% !important;
+    flex: auto !important;
+    max-width: 100% !important;
+}
+
+/* Reset margins that cause overflow */
+.bg-overall {
+    margin-left: 0 !important;
+}
+
+.app-footer {
+    margin-left: 0 !important;
+    width: 100% !important;
+    margin-top: 20px !important;
+}
+
+/* Stack Accomplishments */
+.accomplishments-wrapper {
+    flex-direction: column !important;
+    align-items: center !important;
+    gap: 20px !important;
+}
+
+.acc-left-group,
+.acc-trophy-group {
+    width: 100% !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+}
+
+/* Fix Word Bank Grid */
+.word-grid {
+    display: grid !important;
+    grid-template-columns: repeat(3, 1fr) !important;
+    grid-gap: 5px !important;
+}
+
+.word-item {
+    font-size: 0.8rem !important;
+}
+
+/* Typography Scaling */
+.number-large {
+    font-size: 3rem !important;
+}
+
+.streak-number {
+    font-size: 3rem !important;
+}
+
+/* Fix Summary Columns overlap */
+.summary-columns {
+    flex-direction: row !important;
+    justify-content: space-between !important;
+    gap: 5px !important;
+}
+
+.summary-col {
+    width: 48% !important;
+}
+
+/* Fix Trophy sizing */
+.trophy-img {
+    max-width: 200px !important;
+    width: 60% !important;
+    margin: 0 auto !important;
+}
+
+/* Global Container Safety */
+.app-container {
+    width: 100% !important;
+    padding: 10px !important;
+    overflow-x: hidden !important;
+}
+
+body {
+    overflow-x: hidden !important;
+    padding: 5px !important;
+}

@@ -1,9 +1,7 @@
-/* Fonts */
-
 @import url('https://fonts.googleapis.com/css2?family=Pattaya&display=swap');
 
 :root {
-    --bg-color: #5b7be9;
+    --bg-color: #8c52ff;
     --red-text: #eb2f06;
     --text-dark: #2d3436;
 }
@@ -13,15 +11,18 @@
 }
 
 body {
-    background-color: #5b7be9;
+    background-color: #8c52ff;
     /* Royal blue from reference */
     font-family: 'Poppins', sans-serif;
     margin: 0;
     padding: 15px;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    /* CHANGED: Stack pages vertically */
+    justify-content: flex-start;
+    /* CHANGED: Start from top for scrolling */
     align-items: center;
-    /* Center vertically */
+    /* Center horizontally */
     min-height: 100vh;
     color: var(--text-dark);
 }
@@ -80,39 +81,83 @@ body {
     background-color: transparent;
 }
 
-/* 1. Summary Section */
-.summary-bg {
-    /* Unified Card Style */
-    background-image: none;
+/* 1. Summary Section (Split Layout) */
+.summary-split-container {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    gap: 25px;
+    /* Gap between the two cards */
+    margin-top: 30px;
+    /* Space for the tapes to pop out */
+}
+
+.summary-card {
     background-color: #fffaf0;
-    /* Creamy white like reference */
-    padding: 55px 20px 30px 20px;
     border-radius: 60px;
     box-shadow: 0px 4px 0px rgba(0, 0, 0, 0.15);
-    /* Subtle depth */
     position: relative;
-    /* Optional: If the reference has a border, add it here */
-}
-
-.summary-columns {
-    display: flex;
-    justify-content: space-evenly;
-    align-items: flex-start;
-    width: 100%;
-    text-align: center;
-    gap: 10px;
-}
-
-.summary-col {
+    padding: 50px 20px 30px 20px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 32%;
-    position: relative;
-    justify-content: flex-start;
 }
 
-/* Number Styling - Ultra for the Chunky Look */
+/* Specific sizing for the cards to match visual proportion */
+.summary-card:first-child {
+    flex: 1;
+    /* Overall card is slightly narrower usually, but can be 1 here */
+}
+
+.summary-card:last-child {
+    flex: 1.8;
+    /* This Month card is wider */
+}
+
+/* Tape Headers specific to cards */
+.card-tape-wrapper {
+    position: absolute;
+    top: -35px;
+    /* Pull tape up */
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    z-index: 20;
+}
+
+.card-tape-img {
+    height: 70px;
+    width: auto;
+    filter: drop-shadow(0px 2px 2px rgba(0, 0, 0, 0.2));
+}
+
+/* Inside Content */
+.summary-content-col {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.summary-content-row {
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
+    width: 100%;
+    margin-top: 10px;
+    gap: 15px;
+}
+
+.summary-sub-col {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 48%;
+}
+
+/* Number Styling - Ultra for the Chunky Look (Restored) */
 .number-large {
     font-family: 'Ultra', serif;
     font-size: 8rem;
@@ -123,23 +168,42 @@ body {
     /* Hard solid shadow - Deepened */
     text-shadow: 10px 10px 0px #000000;
     margin-bottom: -40px;
-    /* Positive space */
-    z-index: 1;
+    /* Positive space overlap */
+    z-index: 10;
     position: relative;
     letter-spacing: 2px;
 }
 
-/* New Summary Images */
-.summary-img {
+/* Unified styling for the label images */
+.summary-img-label {
     width: 100%;
-    max-width: 280px;
+    max-width: 200px;
+    /* Slightly smaller to fit */
     height: auto;
-    z-index: 1;
-    position: relative;
+    /* Pull tighter to number for overlap */
+    z-index: 20;
+    /* Ensure label is on top of number bottom */
     filter: drop-shadow(0px 3px 0px rgba(0, 0, 0, 0.1));
 }
 
-/* Removed old label and button classes */
+/* Mobile Adjustments for new structure */
+@media (max-width: 850px) {
+    .summary-split-container {
+        flex-direction: column;
+        gap: 60px;
+        /* More vertical space between stacked cards */
+    }
+
+    .summary-card:last-child {
+        flex: auto;
+        width: 100%;
+    }
+
+    .number-large {
+        font-size: 5rem;
+        margin-bottom: -20px;
+    }
+}
 
 /* 2. Word Bank Section */
 .wordbank-bg {
@@ -177,7 +241,6 @@ body {
 }
 
 .wordbank-footer {
-    border-top: 2px dashed #dcdde1;
     padding-top: 10px;
     color: var(--red-text);
     font-size: 0.95rem;
@@ -190,50 +253,49 @@ body {
 
 /* 3. Bottom Row */
 .bottom-row {
+    margin-top: 10px;
+    /* More space for large cup top */
     display: flex;
-    gap: 25px;
+    gap: 30px;
     width: 100%;
+    /* Align top to ensure cup and card distinct tops match better if needed, 
+       but user said "same height", usually implies top alignment or equal height.
+       Let's try stretching to equal height. */
     align-items: stretch;
-    /* Match height */
 }
 
-/* Accomplishments & Insights Unified Card */
-.acc-bg,
-.insight-wrapper {
-    background-image: none;
-    background-color: #fffaf0;
-    /* Creamy white */
-    border-radius: 60px;
-    box-shadow: 0px 4px 0px rgba(0, 0, 0, 0.15);
-    position: relative;
-    padding: 30px;
-}
-
+/* Accomplishments Wrapper */
 .accomplishments-wrapper {
-    flex: 1.4;
+    flex: 1.5;
     display: flex;
     flex-direction: column;
 }
 
-/* Reuse the container bg logic but specific for acc-bg since structure differs slightly */
 .acc-bg {
-
-    padding: 40px 10px 20px 10px;
-    /* Tighter padding maintained */
+    /* Strict padding: Top allows tape overlap, sides/bottom balanced */
     display: flex;
     flex-direction: column;
     justify-content: center;
-    flex: 1;
-    /* Stretch to fill wrapper height */
     width: 100%;
-    /* Ensure full width */
+    min-height: auto;
+    height: 100%;
+
+    /* SVG Background */
+    background-image: url('assets/accomplishments_container.svg');
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    background-color: transparent;
+    box-shadow: none;
+    border-radius: 0;
 }
 
 .acc-columns {
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
     align-items: flex-start;
     width: 100%;
+    gap: 10px;
+    margin-top: 15px;
 }
 
 .acc-col {
@@ -241,126 +303,98 @@ body {
     flex-direction: column;
     align-items: center;
     width: 48%;
+    /* Balanced columns */
     text-align: center;
 }
 
+/* Visuals: Icon + Number Overlay */
 .streak-visuals {
+    position: relative;
     display: flex;
-    align-items: flex-end;
-    /* Bottom align reference */
+    align-items: center;
     justify-content: center;
-    gap: 0px;
-    height: 90px;
-    /* Ensure height for staggering */
+    width: 100%;
+    height: 100px;
+    /* Compact height */
+    margin-bottom: 20px;
+    /* Clear separation from text */
 }
 
-.icon-fire {
-    width: 60px;
+.icon-visual {
+    position: absolute;
     height: auto;
-    filter: drop-shadow(2px 2px 0px rgba(0, 0, 0, 0.1));
-    margin-right: -15px;
-    position: relative;
+    max-height: none;
     z-index: 1;
-    margin-bottom: 30px;
-    /* Push Fire UP significant amount */
+    /* Icon behind number */
 }
 
-.streak-number {
-    font-family: 'Ultra', serif;
-    font-size: 5rem;
-    color: #ffffff;
-    -webkit-text-stroke: 2.5px black;
+/* Precise positioning relative to center */
+.icon-fire {
+    width: 110px;
+    /* Smaller icon */
+    right: auto;
+    left: 50%;
+    transform: translateX(-85%);
+    /* Shift left of center */
+    top: -40px;
+}
+
+.icon-bullseye {
+    width: 130px;
+    right: auto;
+    left: 50%;
+    transform: translateX(-85%);
+    top: -40px;
+}
+
+/* Number text styling */
+.streak-num {
+    z-index: 5;
+    /* On top */
+    position: relative;
+    margin-bottom: 0 !important;
+    font-size: 4.5rem !important;
+    /* Force smaller size */
+    left: 25%;
+    transform: translateX(-40%);
+    /* Shift left to overlap the icon's right edge */
     text-shadow: 6px 6px 0px #000000;
-    line-height: 0.9;
-    position: relative;
-    z-index: 2;
-    margin-bottom: -5px;
-    /* Push Number DOWN slightly */
+    /* Match tight shadow */
+    -webkit-text-stroke: 2px black;
 }
 
-.rank-visuals {
-    display: flex;
-    align-items: flex-end;
-    /* Bottom align reference */
-    justify-content: center;
-    gap: 0px;
-    height: 90px;
-}
-
-.rank-top {
-    font-family: 'Ultra', serif;
-    color: #eb2f06;
-    font-size: 3.5rem;
-    margin-right: -10px;
-    text-transform: uppercase;
-    transform: scaleY(1.2);
-    position: relative;
-    z-index: 1;
-    margin-bottom: 35px;
-    /* Push "TOP" text UP */
-}
-
-.rank-val {
-    font-family: 'Ultra', serif;
-    color: #ffffff;
-    -webkit-text-stroke: 2.5px black;
-    font-size: 4.5rem;
-    text-shadow: 6px 6px 0 #000;
-    position: relative;
-    left: -12px;
-    z-index: 2;
-    font-size: 5rem;
-    margin-bottom: -20px;
-    /* Push Number DOWN */
-}
-
-.acc-text {
+/* Text Blocks */
+.acc-text-block {
     font-size: 0.85rem;
     font-weight: 700;
-    line-height: 1.25;
     color: #2d3436;
-    margin-top: 10px;
-    padding: 0 10px;
+    line-height: 1.3;
+    margin-top: 5px;
+    max-width: 100%;
+    word-wrap: break-word;
+    padding: 0 5px;
 }
 
-/* Insight Card - Direct on background */
-.insight-wrapper {
+/* Cup Section (Right) */
+.cup-wrapper {
     flex: 1;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 20px 5px;
-    /* Adjust padding */
+    position: relative;
+    padding-bottom: 10px;
 }
 
-
-
-.badge-name {
-    background-color: #d1f2eb;
-    color: #000;
-    /* Black text */
-    padding: 2px 6px;
-    border-radius: 6px;
-    font-weight: 700;
-    display: inline-block;
-}
-
-.insight-content {
-    text-align: center;
-    font-size: 1.2rem;
-    line-height: 2.2;
-    /* Increased generous spacing */
-    color: #2d3436;
-    font-weight: 600;
-    font-family: 'Poppins', sans-serif;
+.cup-img {
     width: 100%;
-    width: 100%;
+    max-width: 500px;
+    height: auto;
+    filter: drop-shadow(2px 4px 6px rgba(0, 0, 0, 0.2));
+    margin: 0;
+    margin-right: -20px;
+    /* Slight alignment tweak */
 }
 
-.badge-num {
-    color: var(--red-text);
-    font-weight: 800;
-}
 
 /* Footer */
 .app-footer {
@@ -373,6 +407,7 @@ body {
     box-shadow: 0px 3px 2px rgba(0, 0, 0, 0.05);
     font-weight: 600;
     margin-bottom: 20px;
+    margin-top: 20px;
 }
 
 @media (max-width: 850px) {
@@ -394,8 +429,8 @@ body {
     }
 }
 
-/* Mobile Specific Tweaks (< 600px) */
-@media (max-width: 600px) {
+/* Mobile Specific Tweaks (< 900px) - Widened to catch tablets/large phones */
+@media (max-width: 900px) {
     .summary-columns {
         flex-direction: column;
         gap: 50px;
@@ -438,6 +473,25 @@ body {
         width: 100%;
     }
 
+    .bottom-row {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .cup-wrapper {
+        width: 100%;
+        margin-top: 20px;
+    }
+
+    .cup-img {
+        max-width: 300px;
+        /* Reasonable mobile size */
+    }
+
+    .acc-col {
+        width: 100%;
+    }
+
     .streak-number,
     .rank-val {
         font-size: 4rem;
@@ -446,12 +500,365 @@ body {
         -webkit-text-stroke: 1.5px black;
     }
 
+    .streak-num {
+        font-size: 4rem;
+    }
+
     .rank-top {
         font-size: 2.5rem;
     }
 
-    .acc-bg,
-    .insight-wrapper {
-        padding: 30px 15px;
+    .app-logo {
+        height: 100px;
+        /* Scale down logo */
     }
+
+    .section-header-img {
+        height: 60px;
+        /* Scale down ribbons */
+    }
+
+    .card-tape-img {
+        height: 50px;
+    }
+
+    /* Accomplishments Mobile Scaling - High Specificity Force */
+    .card-container .streak-visuals {
+        height: 130px !important;
+        margin-bottom: 20px !important;
+    }
+
+    .card-container .icon-fire {
+        width: 100px !important;
+        top: 10px !important;
+        left: 50% !important;
+        right: auto !important;
+        transform: translateX(-80%) !important;
+    }
+
+    .card-container .icon-bullseye {
+        width: 110px !important;
+        top: 10px !important;
+        left: 50% !important;
+        right: auto !important;
+        transform: translateX(-80%) !important;
+    }
+
+    .card-container .streak-num {
+        font-size: 3.5rem !important;
+        left: 50% !important;
+        top: 25px !important;
+        transform: translateX(-25%) !important;
+    }
+
+    .acc-text-block {
+        font-size: 0.8rem;
+    }
+
+    .acc-bg {
+        padding: 40px 15px 30px 15px;
+    }
+}
+
+/* =========================================
+   Page 2 Specific Styles (Progress Report)
+   ========================================= */
+
+.progress-page-container {
+    width: 100%;
+    max-width: 794px;
+    /* A4 Width */
+    margin-top: 50px;
+    padding-bottom: 50px;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    align-items: center;
+}
+
+/* Header Alignment */
+.progress-header-wrapper {
+    margin-bottom: 15px;
+    margin-top: 20px;
+    z-index: 10;
+    align-items: flex-start;
+    width: 100%;
+    padding-left: 0;
+}
+
+.progress-header-img {
+    height: 90px;
+    width: auto;
+    filter: drop-shadow(0px 3px 2px rgba(0, 0, 0, 0.2));
+    margin-left: 10px;
+}
+
+/* Cards Container */
+.progress-list {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+/* Progress Card - Unified */
+.progress-card {
+    background-color: #fffaf0;
+    border-radius: 40px;
+    padding: 25px 30px 15px 30px;
+    box-shadow: 0px 4px 0px rgba(0, 0, 0, 0.15);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* Table Structure */
+.progress-table {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    /* Ensure overflow handling for mobile */
+    overflow-x: auto;
+}
+
+/* Custom Table Grid - Continuous Lines */
+.table-row {
+    display: flex;
+    width: 100%;
+    /* Ensure rows touch each other */
+}
+
+.header-row {
+    border-bottom: 3px solid #000;
+    /* Horizontal Divider */
+    /* REMOVED margin-bottom to connect vertical lines */
+    margin-bottom: 0;
+}
+
+.word-row {
+    /* No top margin */
+}
+
+.table-cell {
+    flex: 1;
+    text-align: center;
+    border-right: 3px solid #000;
+    /* Vertical Line */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Poppins', sans-serif;
+    padding: 0 5px;
+    height: 100%;
+
+    /* Add vertical padding INSIDE cell to replace the row gap */
+    padding-top: 12px;
+    padding-bottom: 12px;
+}
+
+.table-cell:last-child {
+    border-right: none;
+}
+
+/* Header Styling - Vertical Spacing Adjustment */
+.header-row .table-cell {
+    color: #3b00b3;
+    font-weight: 900;
+    font-size: 1.3rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    /* Adjust padding to look balanced with the divider */
+    padding-bottom: 15px;
+}
+
+/* Word Styling */
+.word-row .table-cell {
+    font-weight: 900;
+    font-size: 1.35rem;
+    font-family: 'Poppins', sans-serif;
+    /* Add top padding to create space from the divider line */
+    padding-top: 15px;
+}
+
+/* Split Card Font Size Fix */
+.split-card .word-row .table-cell {
+    font-size: 1.1rem;
+}
+
+.incorrect {
+    color: #ff1e00;
+}
+
+.correct {
+    color: #00c46a;
+}
+
+/* Footer Text in Card */
+.card-footer-text {
+    margin-top: 15px;
+    font-size: 1rem;
+    font-style: italic;
+    color: #2d3436;
+    text-align: center;
+    width: 100%;
+    font-weight: 500;
+}
+
+/* Split Row */
+.progress-split-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    width: 100%;
+}
+
+.split-card {
+    flex-basis: 0;
+    flex-grow: 1;
+    flex-shrink: 0;
+    min-width: 0;
+    padding: 25px 15px 15px 15px;
+    height: 100%;
+}
+
+.split-footer-text {
+    text-align: center;
+    font-style: italic;
+    color: #ffffff;
+    margin-top: -5px;
+    margin-bottom: 5px;
+    font-weight: 600;
+    width: 100%;
+}
+
+/* Footer Note Pill */
+.footer-note {
+    background-color: #fffaf0;
+    border-radius: 40px;
+    padding: 15px 30px;
+    text-align: center;
+    font-size: 0.7rem;
+    color: #2d3436;
+    font-weight: 600;
+    margin-top: 10px;
+    width: 100%;
+    box-sizing: border-box;
+    margin-bottom: 40px;
+}
+
+/* ---------------------------
+   Mobile Responsiveness (Page 2)
+   --------------------------- */
+@media (max-width: 820px) {
+    .progress-page-container {
+        padding: 20px;
+        margin-top: 20px;
+    }
+
+    .progress-header-img {
+        height: 70px;
+        /* Scale header down */
+    }
+
+    .progress-split-row {
+        flex-direction: column;
+        /* Stack split cards */
+    }
+
+    /* Recover width for stacked split cards */
+    .split-card {
+        width: 100%;
+        flex-basis: auto;
+    }
+}
+
+@media (max-width: 600px) {
+    /* Tight Mobile Screens */
+
+    .progress-page-container {
+        padding: 10px;
+        /* Maximize screen space */
+        width: 100%;
+        max-width: 100vw;
+        overflow-x: hidden;
+        /* Prevent body scroll */
+    }
+
+    .progress-card {
+        padding: 20px 0px;
+        /* Remove side padding to give max space to table */
+        border-radius: 20px;
+        width: 100%;
+        overflow: hidden;
+        /* Manage inner scroll */
+    }
+
+    /* Scrollable Container for Table */
+    .progress-table {
+        display: flex;
+        flex-direction: column;
+        overflow-x: auto;
+        /* Enable horizontal scroll */
+        width: 100%;
+        padding-bottom: 5px;
+        /* Space for scrollbar if needed */
+        -webkit-overflow-scrolling: touch;
+        /* Smooth scroll iOS */
+    }
+
+    /* Force Table to have minimum width so it doesn't squish */
+    .table-row {
+        width: 100%;
+        min-width: 500px;
+        /* Ensure enough space for 6 columns */
+    }
+
+    .header-row .table-cell {
+        font-size: 1rem;
+        padding-bottom: 8px;
+        white-space: nowrap;
+        /* Prevent "DAY - 5" breaking */
+    }
+
+    .word-row .table-cell {
+        font-size: 1.1rem;
+        padding-top: 8px;
+        white-space: nowrap;
+        /* Prevent words breaking */
+    }
+
+    .table-cell {
+        padding: 8px 5px;
+        /* Ensure borders render correctly */
+        flex: 1;
+    }
+
+    .footer-note {
+        padding: 15px 15px;
+        font-size: 0.7rem;
+        width: 100%;
+    }
+
+    .card-footer-text {
+        font-size: 0.85rem;
+        padding: 0 15px;
+        /* Add padding back for text */
+    }
+
+    .progress-split-row {
+        gap: 25px;
+        /* Vertical stack gap */
+    }
+}
+/* FINAL MOBILE OVERRIDE - FORCE FIX */
+@media (max-width: 900px) {
+    .card-container .streak-visuals { height: 130px !important; margin-bottom: 25px !important; }
+    .card-container .icon-fire { width: 100px !important; top: 10px !important; left: 50% !important; right: auto !important; transform: translateX(-80%) !important; }
+    .card-container .icon-bullseye { width: 110px !important; top: 10px !important; left: 50% !important; right: auto !important; transform: translateX(-80%) !important; }
+    .card-container .streak-num { font-size: 3.5rem !important; left: 50% !important; top: 25px !important; transform: translateX(-25%) !important; text-shadow: 4px 4px 0px #000 !important; }
+    .acc-col { width: 100% !important; }
+    .acc-columns { flex-direction: column !important; justify-content: center !important; }
 }

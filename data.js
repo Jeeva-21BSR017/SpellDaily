@@ -1,8 +1,10 @@
+
 const appData = {
     "user": {
         "name": "Jeeva",
-        "streakDays": 36,
+        "streakDays": 35,
         "streakMessage": "unstoppable consistency !",
+        "perfectDays": 16,
         "rankTitle": "Top 25",
         "percentileText": "is in the top 35% of learners",
         "learningRate": {
@@ -11,7 +13,7 @@ const appData = {
         }
     },
     "summary": {
-        "practiced": 62,
+        "practiced": 61,
         "correctFirstAttempt": 27
     },
     "wordBank": [
@@ -25,7 +27,7 @@ const appData = {
         },
         {
             "word": "Angry",
-            "correct": true
+            "correct": false
         },
         {
             "word": "Pillow",
@@ -165,3 +167,4 @@ const appData = {
         }
     ]
 };
+
